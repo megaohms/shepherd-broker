@@ -7,11 +7,11 @@ import prisma from '../../../lib/prisma'
 // Optional fields in body:
 // todo: more fields
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
-  const { title, applicantEmail, projectName, companyName, projectAddress } = req.body
-  const result = await prisma.form.create({
+  const { title, email, projectName, companyName, projectAddress } = req.body
+  const result = await prisma.formData.create({
     data: {
       title,
-      email: applicantEmail,
+      email,
       companyName,
       projectName,
       projectAddress,
