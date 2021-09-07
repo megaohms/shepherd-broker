@@ -14,7 +14,7 @@ const Forms: React.FC<Props> = props => {
         <h1>My Forms</h1>
         <main>
           {props.forms.map(form => (
-            <div key={form.fieldType} className="form">
+            <div key={form.formType} className="form">
               <FormListItem form={form} />
             </div>
           ))}

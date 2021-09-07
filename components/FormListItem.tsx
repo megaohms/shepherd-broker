@@ -21,15 +21,15 @@ export type AutomobileFormType = {
   numDrivers: { label: string, type: number},
 }
 export type FormTypeProps = {
-  fieldTypeLabel: string,
-  fieldType: string,
+  formTypeLabel: string,
+  formType: string,
   fields: GeneralLiabilityFormType | AutomobileFormType,
 }
 
-const FormListItem: React.FC<{form: FormProps}> = ({ form }) => {
+const FormListItem: React.FC<{form: FormTypeProps}> = ({ form }) => {
   return (
-    <div onClick={() => Router.push('/[formType]', `/${form.fieldType}`)}>
-        <h2>{form.fieldTypeLabel}</h2>
+    <div onClick={() => Router.push( `/forms/${form.formType}`)}>
+        <h2>{form.formTypeLabel}</h2>
         <style jsx>{`
           div {
             color: inherit;

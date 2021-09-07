@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import Layout from '../components/Layout'
-import Router from 'next/router'
-import {FormTypeProps} from '../components/FormListItem'
+import Layout from '../../components/Layout'
+import Router, {useRouter} from 'next/router'
+import { FormTypeProps } from '../../components/FormListItem'
+import { GetServerSideProps } from 'next'
 
-const FormType: React.FC<FormTypeProps> = props => {
+const FormTypeId: React.FC<FormTypeProps> = props => {
   const [title, setTitle] = useState('')
   const [applicantEmail, setApplicantEmail] = useState('')
   const [projectName, setProjectName] = useState('')
@@ -26,13 +27,12 @@ const FormType: React.FC<FormTypeProps> = props => {
     }
   }
 
-  console.dir(props)
   return (
     <Layout>
       <div>
         <form
           onSubmit={submitData}>
-          <h1>{props.fieldTypeLabel}</h1>
+          <h1>{props.formTypeLabel}</h1>
           {/*<input*/}
           {/*  autoFocus*/}
           {/*  onChange={e => setTitle(e.target.value)}*/}
@@ -95,4 +95,10 @@ const FormType: React.FC<FormTypeProps> = props => {
   )
 }
 
-export default FormType;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const res = await fetch(`http://localhost:3000/api/forms/${context.query.formTypeId}`)
+  const data = await res.json()
+  return { props: { ...data } }
+}
+
+export default FormTypeId;
