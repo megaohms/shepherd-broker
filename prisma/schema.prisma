@@ -9,12 +9,11 @@ datasource db {
 
 model  FormData {
   id    Int     @id @default(autoincrement())
-  title String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  email String  @unique
-  submittedAt DateTime?
   companyName String
-  projectName String
-  projectAddress String
+  createdAt DateTime @default(now())
+  email String?
+  submittedAt DateTime?
+  projectName String?
+  projectAddress String?
+  updatedAt DateTime @default(now())
 }

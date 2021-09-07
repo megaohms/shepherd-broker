@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../lib/prisma'
-import { formTypeIds, formLabels } from '../forms'
+import { formTypeIds, formLabels } from './index'
 
 const fieldNames = {
   companyName: 'companyName',
@@ -33,10 +33,13 @@ const fieldsByFormType = {
 }
 
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
-  const { formTypeId } = req.query
 
+  const { formTypeId } = req.query
   if (req.method === 'GET') {
     handleGET(formTypeId, res)
+  }
+  else if (req.method === 'POST') {
+    handlePOST(formTypeId, req.body, res)
   } else {
     throw new Error(
       `The HTTP ${req.method} method is not supported at this route.`
@@ -51,5 +54,22 @@ async function handleGET(formTypeId, res) {
     formTypeLabel: formLabels[formTypeId],
     fields: fieldsByFormType[formTypeId],
   })
+}
+
+// POST /api/forms
+// Required fields in body: title, applicantEmail, companyName, projectName, projectAddress
+// Optional fields in body:
+// todo: more fields
+async function handlePOST(formTypeId, body, res) {
+  // todo: auth
+  // todo: add formType enum to schema
+  console.dir(body)
+  const result = await prisma.formData.create({
+    data: {
+      // formTypeId,
+      ...body,
+    },
+  })
+  res.json(result)
 }
 

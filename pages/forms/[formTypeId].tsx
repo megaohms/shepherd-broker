@@ -37,6 +37,8 @@ const FormTypeId: React.FC<FormTypeProps> = props => {
 
     try {
       const body = {}
+      // get the values from the form object
+      // values have already been validated in their components
       Object.keys(e.target).forEach(inputItem => {
         const input = e.target[inputItem]
         // only grab inputs that are part of the UI form, and not the button
@@ -44,8 +46,7 @@ const FormTypeId: React.FC<FormTypeProps> = props => {
           body[input.name] = input.value
         }
       })
-      console.log({ body })
-      await fetch(`http://localhost:3000/api/form`, {
+      await fetch(`http://localhost:3000/api/forms/${props.formTypeId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),

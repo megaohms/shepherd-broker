@@ -1,14 +1,24 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '../../../lib/prisma'
 
+export const formTypeIds = {
+  auto: 'auto',
+  genLiability: 'genLiability'
+}
+export const formLabels = {
+    [formTypeIds.genLiability]: 'General Liability',
+    [formTypeIds.auto]: 'Automobile',
+}
 
-// POST /api/forms
-// Required fields in body: title, applicantEmail, companyName, projectName, projectAddress
-// Optional fields in body:
-// todo: more fields
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
-  const result = await prisma.formData.create({
-    data: req.body,
-  })
-  res.json(result)
+  const formTypesList = [
+    {
+      formTypeLabel: formLabels.genLiability,
+      formTypeId: formTypeIds.genLiability,
+    },
+    {
+      formTypeLabel: formLabels.auto,
+      formTypeId: formTypeIds.auto,
+    }
+  ]
+  res.json(formTypesList)
 }
