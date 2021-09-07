@@ -1,23 +1,20 @@
 import React, { useState } from 'react'
 import Layout from '../../components/Layout'
 import { GetServerSideProps } from 'next'
-import { FormListTypeProps } from '../../components/FormListItem'
+import CompanyName from '../../components/CompanyName'
+import type { CompanyNameType } from '../../components/CompanyName'
 
-export type CompanyName = {
-  label: string,
-  type: string,
-}
 
 export type CoverageAmount = {
   label: string,
   type: number,
 }
 export type GeneralLiabilityFormType = {
-  companyName: CompanyName,
+  companyName: CompanyNameType,
   coverageAmount: CoverageAmount,
 }
 export type AutomobileFormType = {
-  companyName: CompanyName,
+  companyName: CompanyNameType,
   coverageAmount: CoverageAmount,
   averageDriverExpYears: { label: string, type: number },
   numDrivers: { label: string, type: number},
@@ -32,14 +29,13 @@ type FormTypeProps = {
 const FormTypeId: React.FC<FormTypeProps> = props => {
   const [title, setTitle] = useState('')
   const [applicantEmail, setApplicantEmail] = useState('')
-  const [projectName, setProjectName] = useState('')
   const [companyName, setCompanyName] = useState('')
   const [projectAddress, setProjectAddress] = useState('')
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     try {
-      const body = { title, applicantEmail, projectName, companyName, projectAddress }
+      const body = { title, applicantEmail, companyName, projectAddress }
       await fetch(`http://localhost:3000/api/form`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -58,13 +54,7 @@ const FormTypeId: React.FC<FormTypeProps> = props => {
         <form
           onSubmit={submitData}>
           <h1>{props.formTypeLabel}</h1>
-          {/*<input*/}
-          {/*  autoFocus*/}
-          {/*  onChange={e => setTitle(e.target.value)}*/}
-          {/*  placeholder="Title"*/}
-          {/*  type="text"*/}
-          {/*  value={title}*/}
-          {/*/>*/}
+          <CompanyName name={companyName} setName={setCompanyName} />
           {/*<input*/}
           {/*  onChange={e => setAuthorEmail(e.target.value)}*/}
           {/*  placeholder="Author (email address)"*/}
