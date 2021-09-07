@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../lib/prisma'
-import { formNames, formLabels } from '../forms'
+import { formTypeIds, formLabels } from '../forms'
 
 const fieldNames = {
   companyName: 'companyName',
@@ -28,8 +28,8 @@ const genLiabilityFields = {
 }
 
 const fieldsByFormType = {
-  [formNames.genLiability]: genLiabilityFields,
-  [formNames.auto]: autoFields,
+  [formTypeIds.genLiability]: genLiabilityFields,
+  [formTypeIds.auto]: autoFields,
 }
 
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
@@ -47,7 +47,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 // GET /api/forms/:formTypeId
 async function handleGET(formTypeId, res) {
   res.json({
-    formTypeId: formNames[formTypeId],
+    formTypeId: formTypeIds[formTypeId],
     formTypeLabel: formLabels[formTypeId],
     fields: fieldsByFormType[formTypeId],
   })
