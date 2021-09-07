@@ -2,16 +2,18 @@ import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import Router from 'next/router'
 
-const Form: React.FC = () => {
+const GenLiability: React.FC = () => {
   const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-  const [authorEmail, setAuthorEmail] = useState('')
+  const [applicantEmail, setApplicantEmail] = useState('')
+  const [projectName, setProjectName] = useState('')
+  const [companyName, setCompanyName] = useState('')
+  const [projectAddress, setProjectAddress] = useState('')
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     try {
-      const body = { title, content, authorEmail }
-      await fetch(`http://localhost:3000/api/post`, {
+      const body = { title, applicantEmail, projectName, companyName, projectAddress }
+      await fetch(`http://localhost:3000/api/form`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -27,7 +29,7 @@ const Form: React.FC = () => {
       <div>
         <form
           onSubmit={submitData}>
-          <h1>Create Draft</h1>
+          <h1>General Liability</h1>
           {/*<input*/}
           {/*  autoFocus*/}
           {/*  onChange={e => setTitle(e.target.value)}*/}
@@ -90,4 +92,4 @@ const Form: React.FC = () => {
   )
 }
 
-export default Form;
+export default GenLiability;

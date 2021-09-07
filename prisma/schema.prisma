@@ -7,13 +7,13 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-model  Form {
+model  FormData {
   id    Int     @id @default(autoincrement())
   title String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   email String  @unique
-  submittedAt DateTime
+  submittedAt DateTime?
   companyName String
   projectName String
   projectAddress String
