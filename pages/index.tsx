@@ -1,21 +1,20 @@
 import React from 'react'
 import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
-import FormListItem, { FormProps } from '../components/FormListItem'
+import FormListItem, {FormTypeProps} from '../components/FormListItem'
 
 type Props = {
-  forms: FormProps[]
+  forms: FormTypeProps[]
 }
 
-const Applications: React.FC<Props> = props => {
+const Forms: React.FC<Props> = props => {
   return (
     <Layout>
       <div className="page">
-        <h1>My Applications</h1>
+        <h1>My Forms</h1>
         <main>
-          { props.forms && props.forms.length &&
-          props.forms.map(form => (
-            <div key={form.id} className="post">
+          {props.forms.map(form => (
+            <div key={form.fieldType} className="form">
               <FormListItem form={form} />
             </div>
           ))}
@@ -47,4 +46,5 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 }
 
-export default Applications
+
+export default Forms

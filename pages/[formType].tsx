@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import Router from 'next/router'
+import {FormTypeProps} from '../components/FormListItem'
 
-const GenLiability: React.FC = () => {
+const FormType: React.FC<FormTypeProps> = props => {
   const [title, setTitle] = useState('')
   const [applicantEmail, setApplicantEmail] = useState('')
   const [projectName, setProjectName] = useState('')
@@ -18,7 +19,8 @@ const GenLiability: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
-      await Router.push('/drafts')
+      // todo: pdf
+      // await Router.push('/drafts')
     } catch (error) {
       console.error(error)
     }
@@ -29,7 +31,7 @@ const GenLiability: React.FC = () => {
       <div>
         <form
           onSubmit={submitData}>
-          <h1>General Liability</h1>
+          <h1>{props.fieldTypeLabel}</h1>
           {/*<input*/}
           {/*  autoFocus*/}
           {/*  onChange={e => setTitle(e.target.value)}*/}
@@ -92,4 +94,4 @@ const GenLiability: React.FC = () => {
   )
 }
 
-export default GenLiability;
+export default FormType;
