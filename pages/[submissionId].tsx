@@ -26,6 +26,7 @@ const FormType: React.FC<FormTypeProps> = props => {
     }
   }
 
+  console.dir(props)
   return (
     <Layout>
       <div>
