@@ -12,6 +12,7 @@ model  FormData {
   companyName String
   createdAt DateTime @default(now())
   email String?
+  formTypeId String @default("genLiability")
   submittedAt DateTime?
   projectName String?
   projectAddress String?

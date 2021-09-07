@@ -62,11 +62,9 @@ async function handleGET(formTypeId, res) {
 // todo: more fields
 async function handlePOST(formTypeId, body, res) {
   // todo: auth
-  // todo: add formType enum to schema
-  console.dir(body)
   const result = await prisma.formData.create({
     data: {
-      // formTypeId,
+      formTypeId,
       ...body,
     },
   })
