@@ -9,7 +9,7 @@ const fieldNames = {
   numDrivers: 'numDrivers',
 }
 const fieldTypes = {
-  [fieldNames.companyName]: { label: 'Company Name', type: 'string' },
+  [fieldNames.companyName]: { label: 'Company Name', type: 'string', validate: (val) => typeof(val) === "string" },
   [fieldNames.coverageAmount]: { label: 'Coverage Amount', type: 'number' },
   [fieldNames.averageDriverExpYears]: { label: 'Driver experience years average', type: 'number' },
   [fieldNames.numDrivers]: { label: 'Number of Drivers', type: 'number' },

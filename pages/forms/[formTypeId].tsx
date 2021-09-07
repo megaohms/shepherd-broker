@@ -8,6 +8,7 @@ import type { CompanyNameType } from '../../components/CompanyName'
 export type CoverageAmount = {
   label: string,
   type: number,
+  validate?: (number) => boolean,
 }
 export type GeneralLiabilityFormType = {
   companyName: CompanyNameType,
@@ -16,8 +17,8 @@ export type GeneralLiabilityFormType = {
 export type AutomobileFormType = {
   companyName: CompanyNameType,
   coverageAmount: CoverageAmount,
-  averageDriverExpYears: { label: string, type: number },
-  numDrivers: { label: string, type: number},
+  averageDriverExpYears: { label: string, type: number, validate?: (number) => boolean },
+  numDrivers: { label: string, type: number, validate?: (number) => boolean },
 }
 
 type FormTypeProps = {
@@ -27,15 +28,23 @@ type FormTypeProps = {
 }
 
 const FormTypeId: React.FC<FormTypeProps> = props => {
-  const [title, setTitle] = useState('')
-  const [applicantEmail, setApplicantEmail] = useState('')
-  const [companyName, setCompanyName] = useState('')
-  const [projectAddress, setProjectAddress] = useState('')
+  // todo: start with invalid form state
+  const [isFormValid, setIsFormValid] = useState(true)
+
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
+
     try {
-      const body = { title, applicantEmail, companyName, projectAddress }
+      const body = {}
+      Object.keys(e.target).forEach(inputItem => {
+        const input = e.target[inputItem]
+        // only grab inputs that are part of the UI form, and not the button
+        if (input.name && input.type !== 'submit' ) {
+          body[input.name] = input.value
+        }
+      })
+      console.log({ body })
       await fetch(`http://localhost:3000/api/form`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -54,7 +63,14 @@ const FormTypeId: React.FC<FormTypeProps> = props => {
         <form
           onSubmit={submitData}>
           <h1>{props.formTypeLabel}</h1>
-          <CompanyName name={companyName} setName={setCompanyName} />
+          {props.fields.companyName && (
+              <CompanyName />
+          )}
+          <input
+              disabled={!isFormValid}
+              type="submit"
+              value="Submit application"
+          />
         </form>
       </div>
       <style jsx>{`
