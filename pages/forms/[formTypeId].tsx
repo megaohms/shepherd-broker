@@ -55,27 +55,6 @@ const FormTypeId: React.FC<FormTypeProps> = props => {
           onSubmit={submitData}>
           <h1>{props.formTypeLabel}</h1>
           <CompanyName name={companyName} setName={setCompanyName} />
-          {/*<input*/}
-          {/*  onChange={e => setAuthorEmail(e.target.value)}*/}
-          {/*  placeholder="Author (email address)"*/}
-          {/*  type="text"*/}
-          {/*  value={authorEmail}*/}
-          {/*/>*/}
-          {/*<textarea*/}
-          {/*  cols={50}*/}
-          {/*  onChange={e => setContent(e.target.value)}*/}
-          {/*  placeholder="Content"*/}
-          {/*  rows={8}*/}
-          {/*  value={content}*/}
-          {/*/>*/}
-          {/*<input*/}
-          {/*  disabled={!content || !title || !authorEmail}*/}
-          {/*  type="submit"*/}
-          {/*  value="Create"*/}
-          {/*/>*/}
-          {/*<a className="back" href="#" onClick={() => Router.push('/')}>*/}
-          {/*  or Cancel*/}
-          {/*</a>*/}
         </form>
       </div>
       <style jsx>{`
