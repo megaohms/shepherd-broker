@@ -33,7 +33,6 @@ const fieldsByFormType = {
 }
 
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
-
   const { formTypeId } = req.query
   if (req.method === 'GET') {
     handleGET(formTypeId, res)
@@ -62,12 +61,12 @@ async function handleGET(formTypeId, res) {
 // todo: more fields
 async function handlePOST(formTypeId, body, res) {
   // todo: auth
-  const result = await prisma.formData.create({
+  await prisma.formData.create({
     data: {
       formTypeId,
       ...body,
     },
   })
-  res.json(result)
+  res.status(200)
 }
 
