@@ -44,12 +44,12 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
   }
 }
 
-// GET /api/forms/:formType
+// GET /api/forms/:formTypeId
 async function handleGET(formTypeId, res) {
   res.json({
-    formType: formNames[formTypeId],
+    formTypeId: formNames[formTypeId],
     formTypeLabel: formLabels[formTypeId],
-    ...fieldsByFormType[formTypeId]
+    fields: fieldsByFormType[formTypeId],
   })
 }
 

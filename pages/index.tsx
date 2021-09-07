@@ -1,10 +1,10 @@
 import React from 'react'
 import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
-import FormListItem, {FormTypeProps} from '../components/FormListItem'
+import FormListItem, { FormListTypeProps } from '../components/FormListItem'
 
 type Props = {
-  forms: FormTypeProps[]
+  forms: FormListTypeProps[]
 }
 
 const Forms: React.FC<Props> = props => {
@@ -14,25 +14,22 @@ const Forms: React.FC<Props> = props => {
         <h1>My Forms</h1>
         <main>
           {props.forms.map(form => (
-            <div key={form.formType} className="form">
+            <div key={form.formTypeId} className="formListItem">
               <FormListItem form={form} />
             </div>
           ))}
         </main>
       </div>
       <style jsx>{`
-        .form {
+        .formListItem {
           background: white;
           transition: box-shadow 0.1s ease-in;
         }
 
-        .form:hover {
+        .formListItem:hover {
           box-shadow: 1px 1px 3px #aaa;
         }
 
-        .form + .post {
-          margin-top: 2rem;
-        }
       `}</style>
     </Layout>
   )

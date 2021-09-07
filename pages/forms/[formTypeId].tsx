@@ -1,8 +1,33 @@
 import React, { useState } from 'react'
 import Layout from '../../components/Layout'
-import Router, {useRouter} from 'next/router'
-import { FormTypeProps } from '../../components/FormListItem'
 import { GetServerSideProps } from 'next'
+import { FormListTypeProps } from '../../components/FormListItem'
+
+export type CompanyName = {
+  label: string,
+  type: string,
+}
+
+export type CoverageAmount = {
+  label: string,
+  type: number,
+}
+export type GeneralLiabilityFormType = {
+  companyName: CompanyName,
+  coverageAmount: CoverageAmount,
+}
+export type AutomobileFormType = {
+  companyName: CompanyName,
+  coverageAmount: CoverageAmount,
+  averageDriverExpYears: { label: string, type: number },
+  numDrivers: { label: string, type: number},
+}
+
+type FormTypeProps = {
+  formTypeId: 'string',
+  formTypeLabel: 'string',
+  fields: GeneralLiabilityFormType | AutomobileFormType,
+}
 
 const FormTypeId: React.FC<FormTypeProps> = props => {
   const [title, setTitle] = useState('')

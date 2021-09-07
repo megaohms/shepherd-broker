@@ -1,34 +1,14 @@
 import React from 'react'
 import Router from 'next/router'
 
-export type CompanyName = {
-  label: string,
-  type: string,
-}
-
-export type CoverageAmount = {
-  label: string,
-  type: number,
-}
-export type GeneralLiabilityFormType = {
-  companyName: CompanyName,
-  coverageAmount: CoverageAmount,
-}
-export type AutomobileFormType = {
-  companyName: CompanyName,
-  coverageAmount: CoverageAmount,
-  averageDriverExpYears: { label: string, type: number },
-  numDrivers: { label: string, type: number},
-}
-export type FormTypeProps = {
+export type FormListTypeProps = {
   formTypeLabel: string,
-  formType: string,
-  fields: GeneralLiabilityFormType | AutomobileFormType,
+  formTypeId: string,
 }
 
-const FormListItem: React.FC<{form: FormTypeProps}> = ({ form }) => {
+const FormListItem: React.FC<{form: FormListTypeProps}> = ({ form }) => {
   return (
-    <div onClick={() => Router.push( `/forms/${form.formType}`)}>
+    <div onClick={() => Router.push( `/forms/${form.formTypeId}`)}>
         <h2>{form.formTypeLabel}</h2>
         <style jsx>{`
           div {
